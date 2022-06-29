@@ -13,13 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATMProject.Application", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{132B9996-BAAB-4C77-B4D0-99D4842D8632}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMProject.Infrastructure", "src\Infrastructure\ATMProject.Infrastructure\ATMProject.Infrastructure.csproj", "{B58EA6B6-029A-4375-9483-8AA5FE51814F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATMProject.Infrastructure", "src\Infrastructure\ATMProject.Infrastructure\ATMProject.Infrastructure.csproj", "{B58EA6B6-029A-4375-9483-8AA5FE51814F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMProject.Persistance", "src\Infrastructure\ATMProject.Persistance\ATMProject.Persistance.csproj", "{EAE09EED-C4ED-4F3E-8109-3CF3FE1C4480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATMProject.Persistance", "src\Infrastructure\ATMProject.Persistance\ATMProject.Persistance.csproj", "{EAE09EED-C4ED-4F3E-8109-3CF3FE1C4480}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{8F6601EA-3F03-4D81-91C9-60CF954AA96C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMProject.WebAPI", "src\WebApi\ATMProject.WebAPI\ATMProject.WebAPI.csproj", "{53A81FB5-BAEB-4FBE-9043-439AD2352D96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATMProject.WebAPI", "src\WebApi\ATMProject.WebAPI\ATMProject.WebAPI.csproj", "{53A81FB5-BAEB-4FBE-9043-439AD2352D96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

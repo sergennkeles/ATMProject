@@ -14,9 +14,10 @@ namespace ATMProject.Application.Mapping
     {
         public MapProfile()
         {
-            CreateMap<Customer, CustomerInfoDto>().ReverseMap();
-            CreateMap<Customer, CustomerInfoWithAccountDto>().ReverseMap();
-            CreateMap<Customer, UpdateCustomerCommand>().ReverseMap();
+            CreateMap<Account, UserInfoDto>().ReverseMap();
+            CreateMap<Account, UserInfoWithAccountDto>().ReverseMap();
+            CreateMap<Account, UpdateUserCommand>().ReverseMap();
+            CreateMap<UpdateUserInfoDto, UpdateUserCommand>().ReverseMap();
             CreateMap<Account, AccountInfoDto>().ReverseMap();
      
         }

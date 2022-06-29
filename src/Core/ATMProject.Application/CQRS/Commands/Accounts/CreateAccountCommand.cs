@@ -12,7 +12,7 @@ namespace ATMProject.Application.CQRS.Commands.Accounts
     public class CreateAccountCommand:IRequest<ServiceResponse<ServiceResponseNoData>>
     {
 
-        public int CustomerId { get; set; }
+        public int Id { get; set; }
         public decimal Cash { get; set; }
     }
 }

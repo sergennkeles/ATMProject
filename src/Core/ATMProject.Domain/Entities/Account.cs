@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ATMProject.Domain.Entities
 {
-    public  class Account:BaseEntity
+
+    public  class Account:User
     {
      
-        public int CustomerId { get; set; }
+  
         public decimal Cash { get; set; }
 
-        public Customer Customer { get; set; }
     }
 }

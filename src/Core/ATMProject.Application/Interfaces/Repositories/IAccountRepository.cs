@@ -9,5 +9,7 @@ namespace ATMProject.Application.Interfaces.Repositories
 {
     public interface IAccountRepository:IGenericRepository<Account>
     {
+        List<OperationClaim> GetClaims(Account account);
+       // List<Account> GetCustomerInfoWithCash();
     }
 }

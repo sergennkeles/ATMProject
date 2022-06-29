@@ -54,7 +54,7 @@ namespace ATMProject.Persistance.Services
         }
 
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
-        {
+         {
             return _genericRepository.Get(predicate);
         }
     }

@@ -1,4 +1,5 @@
-﻿using ATMProject.Application.Interfaces.Services;
+﻿using ATMProject.Application.DTOs;
+using ATMProject.Application.Interfaces.Services;
 using ATMProject.Application.Wrappers;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ATMProject.Application.CQRS.Commands.Accounts
 {
-    public class AddCashHandler : IRequestHandler<AddCashCommand, ServiceResponse<ServiceResponseNoData>>
+    public class AddCashHandler : IRequestHandler<AddCashCommand, ServiceResponse<CashAddDto>>
     {
         private readonly IAccountService _accountService;
 
@@ -18,17 +19,20 @@ namespace ATMProject.Application.CQRS.Commands.Accounts
             _accountService = accountService;
         }
 
-        public async Task<ServiceResponse<ServiceResponseNoData>> Handle(AddCashCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResponse<CashAddDto>> Handle(AddCashCommand request, CancellationToken cancellationToken)
         {
-            var account= _accountService.Get(x => x.Id == request.Id).FirstOrDefault();
+
+          var account= _accountService.Get(x => x.Id== request.Id).FirstOrDefault();
+           
             if (account == null)
             {
-                return new ServiceResponse<ServiceResponseNoData>("Böyle bir hesap  bilgisi yok.");
+                return new ServiceResponse<CashAddDto>("Böyle bir hesap  bilgisi yok.");
             }
-
-            account.Cash=request.Cash;
+             account.Cash=request.Cash; 
+        
+            
             await _accountService.UpdateAsync(account);
-            return new ServiceResponse<ServiceResponseNoData> ("Hesabınıza para yatırılmıştır.");
+            return new ServiceResponse<CashAddDto> ("Hesabınıza para yatırılmıştır.");
         }
     }
 }

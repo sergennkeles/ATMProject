@@ -22,8 +22,8 @@ namespace ATMProject.Application.CQRS.Commands.Accounts
 
         public async Task<ServiceResponse<ServiceResponseNoData>> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
-            Account account=new Account { CustomerId = request.CustomerId ,Cash=request.Cash};
-            await _accountService.AddAsync(account);
+            Account account=new Account {Cash=request.Cash};
+            await _accountService.UpdateAsync(account);
             return new ServiceResponse<ServiceResponseNoData>("Kayıt başarılı.");
         }
     }

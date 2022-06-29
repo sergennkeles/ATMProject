@@ -1,4 +1,6 @@
-﻿using ATMProject.Domain.Common;
+﻿using ATMProject.Application.DTOs;
+using ATMProject.Application.Wrappers;
+using ATMProject.Domain.Common;
 using ATMProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,5 +12,7 @@ namespace ATMProject.Application.Interfaces.Services
 {
     public  interface IAccountService:IGenericService<Account>
     {
+        Task<List<OperationClaim>> GetClaims(Account account);
+        ServiceResponse<UpdateUserInfoDto> UpdateUserInfo(UpdateUserInfoDto user);
     }
 }

@@ -18,13 +18,17 @@ namespace ATMProject.Persistance.Context
         }
       
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Bank> Banks { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+
+
         override protected void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            
+           
+        
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());  // oluşturduğumuz configuration class'larını otomatik olarak bulup eklememizi sağlıyor 
             // Bunu IEntityTypeConfiguration interface'ini implemente eden class'ları bul diye yorumlayabiliriz.
             base.OnModelCreating(modelBuilder);                                       // base.OnModelCreating(modelBuilder); ile özelliklerimizi çalıştırıyoruz.

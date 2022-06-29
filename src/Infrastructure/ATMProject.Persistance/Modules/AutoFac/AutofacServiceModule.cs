@@ -13,6 +13,7 @@ using ATMProject.Persistance.UnitOfWorks;
 using ATMProject.Application.Interfaces.UnitOfWorks;
 using System.Reflection;
 using ATMProject.Persistance.Context;
+using ATMProject.Application.Utilities.Security.JWT;
 
 namespace ATMProject.Persistance.Modules.AutoFac
 {
@@ -25,7 +26,9 @@ namespace ATMProject.Persistance.Modules.AutoFac
             builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IGenericService<>)).InstancePerLifetimeScope(); // Service sınıfının generic tipi olarak register ediyoruz.
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope(); // UnitOfWork sınıfının generic tipi olmadan register ediyoruz. Çünkü UnitOfWork sınıfını generic değil.
+          //  builder.RegisterType<AuthService>().As<IAuthService>().SingleInstance();
 
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
             // Assembly'lerin (katmanların) yolunu belirtiyoruz. Burada Assembly.GetExecutingAssembly() metodu ile bulunduğumuz katmanının yolunu alıyoruz.
             // GetAssemblye(typeof()) metodu ile o sınıfın bulunduğu assembly'inin yolunu alıyoruz alıyoruz. Burada hangi sınıfı belirttiğimiz önemli değil. Hangi assembly'i belirttiğimiz önemli.
             var apiAssembly = Assembly.GetExecutingAssembly();

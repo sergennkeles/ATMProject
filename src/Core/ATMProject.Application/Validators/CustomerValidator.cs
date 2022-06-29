@@ -17,7 +17,7 @@ namespace ATMProject.Application.Validators
             RuleFor(x=>x.FirstName).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
             RuleFor(x=>x.LastName).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
             RuleFor(x=>x.Email).NotEmpty().NotNull().EmailAddress().WithMessage("{PropertyName} is required" );
-            RuleFor(x=>x.Password).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
+          //  RuleFor(x=>x.Password).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
         }
     }
 }

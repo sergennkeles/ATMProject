@@ -9,7 +9,6 @@ namespace ATMProject.Application.DTOs
     public class AccountInfoDto: BaseDto
     {
 
-        public int CustomerId { get; set; }
         public decimal  Cash { get; set; }
     }
 }
