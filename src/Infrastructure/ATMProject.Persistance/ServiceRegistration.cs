@@ -3,6 +3,7 @@ using ATMProject.Application.Interfaces.Services;
 using ATMProject.Persistance.Context;
 using ATMProject.Persistance.Repositories;
 using ATMProject.Persistance.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -21,10 +22,10 @@ namespace ATMProject.Persistance
         public static void AddPersistenceRegisterService(this IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(ConfigurationConnectionString.ConnectionString));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-     
             //  services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-    
+
             //services.AddScoped<IBankRepository, BankRepository>();
             //services.AddScoped<IAccountRepository, AccountRepository>();
         }

@@ -1,4 +1,5 @@
-﻿using ATMProject.Application.DTOs;
+﻿using ATMProject.Application.Aspects.BusinessAspects;
+using ATMProject.Application.DTOs;
 using ATMProject.Application.Interfaces.Repositories;
 using ATMProject.Application.Interfaces.Services;
 using ATMProject.Application.Interfaces.UnitOfWorks;
@@ -16,22 +17,27 @@ namespace ATMProject.Persistance.Services
     public class AccountService : GenericService<Account>, IAccountService
     {
 
-        private readonly IAccountRepository _userRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly IUnitOfWork _unitOfWork;
         public AccountService(IGenericRepository<Account> genericRepository, IUnitOfWork unitOfWork, IAccountRepository accountRepository) : base(genericRepository, unitOfWork)
         {
-            _userRepository = accountRepository;
+            _accountRepository = accountRepository;
             _unitOfWork = unitOfWork;
+        }
+
+        public Account GetByMail(string mail)
+        {
+            return _accountRepository.Get(x => x.Email == mail).FirstOrDefault();
         }
 
         public async Task<List<OperationClaim>> GetClaims(Account account)
         {
-            return _userRepository.GetClaims(account);
+            return _accountRepository.GetClaims(account);
         }
-
+        [SecuredOperation("user")]
         public ServiceResponse<UpdateUserInfoDto> UpdateUserInfo(UpdateUserInfoDto user)
         {
-            var updatedUser = _userRepository.Get(x => x.Id == user.Id).FirstOrDefault();
+            var updatedUser = _accountRepository.Get(x => x.Id == user.Id).FirstOrDefault();
             if (updatedUser == null)
             {
                 return new ServiceResponse<UpdateUserInfoDto>("Böyle kullanıcı yok");
@@ -45,7 +51,7 @@ namespace ATMProject.Persistance.Services
             updatedUser.Email = user.Email;
             updatedUser.PasswordHash = passwordHash;
             updatedUser.PasswordSalt = passwordSalt;
-            _userRepository.Update(updatedUser);
+            _accountRepository.Update(updatedUser);
             _unitOfWork.SaveChange();
             return new ServiceResponse<UpdateUserInfoDto>("Güncelleme başarılı");
         }

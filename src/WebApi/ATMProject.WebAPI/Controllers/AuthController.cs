@@ -17,8 +17,15 @@ namespace ATMProject.WebAPI.Controllers
             this.mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterCommand command)
+        {
+            var result = await mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(LoginCommand command)
         {
             var result = await mediator.Send(command);
             return Ok(result);

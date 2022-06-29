@@ -1,6 +1,7 @@
 ﻿using ATMProject.Application.DTOs;
 using ATMProject.Application.Interfaces.Services;
 using ATMProject.Application.Wrappers;
+using AutoMapper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,8 @@ namespace ATMProject.Application.CQRS.Commands.Auths
         async Task<ServiceResponse<ServiceResponseNoData>> IRequestHandler<RegisterCommand, ServiceResponse<ServiceResponseNoData>>.Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             var registerUser = _authService.Register(request.RegisterDto, request.RegisterDto.Password);
-            _authService.CreateAccessToken(registerUser.Result);
+       
+            _authService.CreateAccessToken(registerUser.Data);
             return new ServiceResponse<ServiceResponseNoData>("Hesap oluşturuldu.");
         }
     }

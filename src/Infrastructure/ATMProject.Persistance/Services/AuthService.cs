@@ -2,6 +2,7 @@
 using ATMProject.Application.Interfaces.Services;
 using ATMProject.Application.Utilities.Security.Hashing;
 using ATMProject.Application.Utilities.Security.JWT;
+using ATMProject.Application.Wrappers;
 using ATMProject.Domain.Common;
 using ATMProject.Domain.Entities;
 using System;
@@ -30,12 +31,23 @@ namespace ATMProject.Persistance.Services
             return Task.FromResult(token);
         }
 
-        public async Task<Account> Login(UserForLoginDto userForLoginDto)
+        public ServiceResponse<Account> Login(UserForLoginDto userForLoginDto)
         {
-            throw new NotImplementedException();
+            var userToCheck = _service.GetByMail(userForLoginDto.Email);
+            if (userToCheck==null)
+            {
+                return new ServiceResponse<Account>("Kayıtlı böyle bir kullanıcı yok.");
+            }
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password,userToCheck.PasswordHash,userToCheck.PasswordSalt))
+            {
+                return new ServiceResponse<Account>("Parolanız yanlış.");
+
+            }
+            return new ServiceResponse<Account>(userToCheck,true,"Giriş başarılı");
+
         }
 
-        public async Task<Account> Register(UserForRegisterDto userForRegisterDto, string password)
+        public ServiceResponse<Account> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -49,8 +61,8 @@ namespace ATMProject.Persistance.Services
                 PasswordSalt = passwordSalt,
            
             };
-           await _service.AddAsync(user);
-            return user;
+            _service.AddAsync(user);
+            return new ServiceResponse<Account>(user, true, "Hesap oluşturuldu..."); ;
         }
     }
 }
