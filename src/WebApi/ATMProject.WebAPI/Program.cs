@@ -1,10 +1,8 @@
 using ATMProject.Application;
-using ATMProject.Application.Validators;
 using ATMProject.Persistance;
 using ATMProject.Persistance.Modules.AutoFac;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +31,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();

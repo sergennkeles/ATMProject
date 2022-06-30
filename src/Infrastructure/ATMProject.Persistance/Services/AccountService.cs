@@ -1,16 +1,10 @@
-﻿using ATMProject.Application.Aspects.BusinessAspects;
-using ATMProject.Application.DTOs;
+﻿using ATMProject.Application.DTOs;
 using ATMProject.Application.Interfaces.Repositories;
 using ATMProject.Application.Interfaces.Services;
 using ATMProject.Application.Interfaces.UnitOfWorks;
 using ATMProject.Application.Utilities.Security.Hashing;
 using ATMProject.Application.Wrappers;
 using ATMProject.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ATMProject.Persistance.Services
 {
@@ -34,7 +28,7 @@ namespace ATMProject.Persistance.Services
         {
             return _accountRepository.GetClaims(account);
         }
-        [SecuredOperation("user")]
+     
         public ServiceResponse<UpdateUserInfoDto> UpdateUserInfo(UpdateUserInfoDto user)
         {
             var updatedUser = _accountRepository.Get(x => x.Id == user.Id).FirstOrDefault();

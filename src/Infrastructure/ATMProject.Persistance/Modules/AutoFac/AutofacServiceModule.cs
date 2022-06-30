@@ -1,19 +1,16 @@
-﻿using Module = Autofac.Module;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ATMProject.Persistance.Repositories;
-using ATMProject.Application.Interfaces.Repositories;
-using Autofac;
+﻿using ATMProject.Application.Interfaces.Repositories;
 using ATMProject.Application.Interfaces.Services;
+using ATMProject.Application.Interfaces.UnitOfWorks;
+using ATMProject.Application.Utilities.Security.JWT;
+using ATMProject.Persistance.Context;
+using ATMProject.Persistance.Repositories;
 using ATMProject.Persistance.Services;
 using ATMProject.Persistance.UnitOfWorks;
-using ATMProject.Application.Interfaces.UnitOfWorks;
+using Autofac;
+using Autofac.Extras.DynamicProxy;
+using Castle.DynamicProxy;
 using System.Reflection;
-using ATMProject.Persistance.Context;
-using ATMProject.Application.Utilities.Security.JWT;
+using Module = Autofac.Module;
 
 namespace ATMProject.Persistance.Modules.AutoFac
 {
@@ -47,6 +44,7 @@ namespace ATMProject.Persistance.Modules.AutoFac
               .Where(t => t.Name.EndsWith("Service"))
               .AsImplementedInterfaces()
               .InstancePerLifetimeScope();
+
 
 
         }
