@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace ATMProject.Application.DTOs
 {
-    public class AccountInfoDto: BaseDto
+    public class AccountInfoDto
     {
 
+        public int Id { get; set; }
         public decimal  Cash { get; set; }
     }
 }

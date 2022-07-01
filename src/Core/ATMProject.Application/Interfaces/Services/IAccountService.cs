@@ -15,5 +15,7 @@ namespace ATMProject.Application.Interfaces.Services
         Task<List<OperationClaim>> GetClaims(Account account);
         ServiceResponse<UpdateUserInfoDto> UpdateUserInfo(UpdateUserInfoDto user);
         Account GetByMail(string mail);
+        ServiceResponse<AccountInfoDto> WithDrawMoney(AccountInfoDto account,decimal money);
     }
 }
+

@@ -28,6 +28,14 @@ namespace ATMProject.WebAPI.Controllers
             return Ok(result);
         }
 
+
+        [HttpPatch("withdrawcash")]
+        public async Task<IActionResult> WithDrawCash(WithDrawCashCommand command)
+        {
+            var result = await mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPatch("add")]
         public async Task<IActionResult> Add(CreateCustomerCommand command)
         {
