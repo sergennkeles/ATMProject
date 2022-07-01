@@ -19,8 +19,6 @@ namespace ATMProject.WebAPI.Controllers
         }
 
         [HttpPost("Register")]
-
-
         public async Task<IActionResult> Register(RegisterCommand command)
         {
             var result = await mediator.Send(command);

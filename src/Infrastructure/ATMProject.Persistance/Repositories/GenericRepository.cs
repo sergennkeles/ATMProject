@@ -54,5 +54,7 @@ namespace ATMProject.Persistance.Repositories
         {
             _dbSet.Update(entity);
         }
+
+    
     }
 }

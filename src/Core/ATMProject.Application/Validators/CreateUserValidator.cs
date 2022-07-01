@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace ATMProject.Application.Validators
 {
-    public class UserValidator: AbstractValidator<RegisterCommand>
+    public class CreateUserValidator: AbstractValidator<RegisterCommand>
     {
-        public UserValidator()
+        public CreateUserValidator()
         {
             RuleFor(x=>x.RegisterDto.FirstName).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
             RuleFor(x=>x.RegisterDto.LastName).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );

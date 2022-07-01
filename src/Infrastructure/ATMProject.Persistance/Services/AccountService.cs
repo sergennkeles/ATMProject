@@ -1,4 +1,5 @@
 ﻿using ATMProject.Application.DTOs;
+using ATMProject.Application.Exceptions;
 using ATMProject.Application.Interfaces.Repositories;
 using ATMProject.Application.Interfaces.Services;
 using ATMProject.Application.Interfaces.UnitOfWorks;
@@ -21,7 +22,13 @@ namespace ATMProject.Persistance.Services
 
         public Account GetByMail(string mail)
         {
-            return _accountRepository.Get(x => x.Email == mail).FirstOrDefault();
+            var account = _accountRepository.Get(x => x.Email == mail).FirstOrDefault() ;
+
+            if (account == null)
+            {
+                throw new ValidationException("Böyle bir kullanıcı yok.");
+            }
+            return account;
         }
 
         public async Task<List<OperationClaim>> GetClaims(Account account)

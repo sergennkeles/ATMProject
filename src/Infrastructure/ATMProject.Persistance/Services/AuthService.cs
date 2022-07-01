@@ -34,10 +34,7 @@ namespace ATMProject.Persistance.Services
         public ServiceResponse<Account> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _service.GetByMail(userForLoginDto.Email);
-            if (userToCheck==null)
-            {
-                return new ServiceResponse<Account>("Kayıtlı böyle bir kullanıcı yok.");
-            }
+           
             if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password,userToCheck.PasswordHash,userToCheck.PasswordSalt))
             {
                 return new ServiceResponse<Account>("Parolanız yanlış.");

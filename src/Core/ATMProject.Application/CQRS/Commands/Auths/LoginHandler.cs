@@ -24,9 +24,9 @@ namespace ATMProject.Application.CQRS.Commands.Auths
             var loginUser = _authService.Login(request.Login);
 
             var token = _authService.CreateAccessToken(loginUser.Data);
-            //TOKEN'I response ekleme olayını araştır
+           
 
-            return await token;
+            return  await token;
         }
     }
 }
