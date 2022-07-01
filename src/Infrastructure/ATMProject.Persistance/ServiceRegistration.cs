@@ -21,8 +21,8 @@ namespace ATMProject.Persistance
         // WebAPI tarafında program.cs içinde şu kod satırı ile çağırıyoruz: builder.Services.PersistenceRegisterService();
         public static void AddPersistenceRegisterService(this IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(ConfigurationConnectionString.ConnectionString));
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+           services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(ConfigurationConnectionString.ConnectionString));
+         //   services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //  services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

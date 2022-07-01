@@ -47,7 +47,7 @@ namespace ATMProject.Persistance.Services
 
         }
 
-        public ServiceResponse<Account> Register(UserForRegisterDto userForRegisterDto, string password)
+        public async Task<ServiceResponse<Account>> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -61,8 +61,8 @@ namespace ATMProject.Persistance.Services
                 PasswordSalt = passwordSalt,
            
             };
-            _service.AddAsync(user);
-            return new ServiceResponse<Account>(user, true, "Hesap oluşturuldu..."); ;
+           await   _service.AddAsync(user);
+            return  new ServiceResponse<Account>(user, true, "Hesap oluşturuldu..."); ;
         }
     }
 }

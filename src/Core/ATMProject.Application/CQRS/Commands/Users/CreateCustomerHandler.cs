@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATMProject.Application.Interfaces.Services;
+using ATMProject.Application.Utilities.Security.Hashing;
 
 namespace ATMProject.Application.CQRS.Commands.Customers
 {
@@ -26,12 +27,16 @@ namespace ATMProject.Application.CQRS.Commands.Customers
 
         public async Task<ServiceResponse<UserInfoDto>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(request.Password, out passwordHash, out passwordSalt);
             var customer = new Account
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Email = request.Email,
-              //  Password = request.Password,
+                PasswordHash=passwordHash,
+                PasswordSalt=passwordSalt
+            
             };
 
             var addCustomer = await  _customerService.AddAsync(customer);

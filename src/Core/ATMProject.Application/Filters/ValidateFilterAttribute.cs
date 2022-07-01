@@ -17,10 +17,14 @@ namespace ATMProject.Application.Filters
 
                 foreach (var error in errors)
                 {
+                    context.Result = new BadRequestObjectResult(new ValidationException(error));
 
-                context.Result = new BadRequestObjectResult(new ValidationException(error));
                 }
             }
         }
+
     }
+
 }
+
+

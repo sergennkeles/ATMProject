@@ -1,4 +1,5 @@
 ﻿using ATMProject.Application.CQRS.Commands.Auths;
+using ATMProject.Application.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,8 @@ namespace ATMProject.WebAPI.Controllers
         }
 
         [HttpPost("Register")]
+
+
         public async Task<IActionResult> Register(RegisterCommand command)
         {
             var result = await mediator.Send(command);

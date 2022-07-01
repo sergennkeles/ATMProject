@@ -7,8 +7,6 @@ using ATMProject.Persistance.Repositories;
 using ATMProject.Persistance.Services;
 using ATMProject.Persistance.UnitOfWorks;
 using Autofac;
-using Autofac.Extras.DynamicProxy;
-using Castle.DynamicProxy;
 using System.Reflection;
 using Module = Autofac.Module;
 
@@ -23,7 +21,7 @@ namespace ATMProject.Persistance.Modules.AutoFac
             builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IGenericService<>)).InstancePerLifetimeScope(); // Service sınıfının generic tipi olarak register ediyoruz.
 
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope(); // UnitOfWork sınıfının generic tipi olmadan register ediyoruz. Çünkü UnitOfWork sınıfını generic değil.
-          //  builder.RegisterType<AuthService>().As<IAuthService>().SingleInstance();
+                                                                                             //  builder.RegisterType<AuthService>().As<IAuthService>().SingleInstance();
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
             // Assembly'lerin (katmanların) yolunu belirtiyoruz. Burada Assembly.GetExecutingAssembly() metodu ile bulunduğumuz katmanının yolunu alıyoruz.
@@ -45,6 +43,7 @@ namespace ATMProject.Persistance.Modules.AutoFac
               .AsImplementedInterfaces()
               .InstancePerLifetimeScope();
 
+     
 
 
         }

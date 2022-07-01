@@ -28,6 +28,13 @@ namespace ATMProject.WebAPI.Controllers
             return Ok(result);
         }
 
+        [HttpPatch("add")]
+        public async Task<IActionResult> Add(CreateCustomerCommand command)
+        {
+            var result = await mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpGet("getallaccount")]
         public async Task<IActionResult> GetAllAccount()
         {

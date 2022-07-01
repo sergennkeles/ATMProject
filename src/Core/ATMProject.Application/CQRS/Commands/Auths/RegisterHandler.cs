@@ -21,12 +21,15 @@ namespace ATMProject.Application.CQRS.Commands.Auths
             _authService = authService;
         }
 
-        async Task<ServiceResponse<ServiceResponseNoData>> IRequestHandler<RegisterCommand, ServiceResponse<ServiceResponseNoData>>.Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResponse<ServiceResponseNoData>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            var registerUser = _authService.Register(request.RegisterDto, request.RegisterDto.Password);
-       
-            _authService.CreateAccessToken(registerUser.Data);
+            var registerUser = await _authService.Register(request.RegisterDto, request.RegisterDto.Password);
+
+           await  _authService.CreateAccessToken(registerUser.Data);
             return new ServiceResponse<ServiceResponseNoData>("Hesap oluşturuldu.");
         }
+
+
+     
     }
 }

@@ -13,7 +13,7 @@ namespace ATMProject.Application.Interfaces.Services
 {
     public interface IAuthService
     {
-        ServiceResponse<Account> Register(UserForRegisterDto userForRegisterDto,string password);
+        Task<ServiceResponse<Account>> Register(UserForRegisterDto userForRegisterDto,string password);
         ServiceResponse<Account> Login(UserForLoginDto userForLoginDto);
         Task<AccessToken> CreateAccessToken(Account account);
     }

@@ -1,4 +1,5 @@
 ﻿using ATMProject.Application.CQRS.Commands;
+using ATMProject.Application.CQRS.Commands.Auths;
 using ATMProject.Application.DTOs;
 using ATMProject.Domain.Entities;
 using FluentValidation;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace ATMProject.Application.Validators
 {
-    public class UserValidator: AbstractValidator<UserForRegisterDto>
+    public class UserValidator: AbstractValidator<RegisterCommand>
     {
         public UserValidator()
         {
-            RuleFor(x=>x.FirstName).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
-            RuleFor(x=>x.LastName).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
-            RuleFor(x=>x.Email).NotEmpty().NotNull().EmailAddress().WithMessage("{PropertyName} is required" );
-            RuleFor(x=>x.Password).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
+            RuleFor(x=>x.RegisterDto.FirstName).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
+            RuleFor(x=>x.RegisterDto.LastName).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
+            RuleFor(x=>x.RegisterDto.Email).NotEmpty().NotNull().EmailAddress().WithMessage("{PropertyName} is required" );
+            RuleFor(x=>x.RegisterDto.Password).NotEmpty().NotNull().WithMessage("{PropertyName} is required" );
         }
     }
 }
