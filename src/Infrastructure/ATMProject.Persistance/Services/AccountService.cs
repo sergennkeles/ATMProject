@@ -24,15 +24,15 @@ namespace ATMProject.Persistance.Services
             _mapper = mapper;
         }
 
-        public Account GetByMail(string mail) 
+        public ServiceResponse<Account> GetByMail(string mail) 
         {
             var account = _accountRepository.Get(x => x.Email == mail).FirstOrDefault() ;
 
             if (account == null)
             {
-                throw new ValidationException("Böyle bir kullanıcı yok.");// BURAYA TEKRAR BAK! Login kısmında problem var!
+               return new ServiceResponse<Account>("Böyle bir kullanıcı yok.");// BURAYA TEKRAR BAK! Login kısmında problem var!
             }
-            return account;
+            return new ServiceResponse<Account>(account,true,"");
         }
 
         public async Task<List<OperationClaim>> GetClaims(Account account)

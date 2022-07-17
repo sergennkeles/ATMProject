@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ATMProject.Application.CQRS.Commands.Auths
 {
-    public class LoginCommand:IRequest<AccessToken>
+    public class LoginCommand:IRequest<ServiceResponse<AccessToken>>
     {
         public UserForLoginDto Login { get; set; }
     }

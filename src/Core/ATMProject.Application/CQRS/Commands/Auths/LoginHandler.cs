@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ATMProject.Application.CQRS.Commands.Auths
 {
-    public class LoginHandler : IRequestHandler<LoginCommand, AccessToken>
+    public class LoginHandler : IRequestHandler<LoginCommand, ServiceResponse<AccessToken>>
     {
         private readonly IAuthService _authService;
 
@@ -19,14 +19,19 @@ namespace ATMProject.Application.CQRS.Commands.Auths
         {
             _authService = authService;
         }
-        public async Task<AccessToken> Handle(LoginCommand request, CancellationToken cancellationToken)
+
+        public async Task<ServiceResponse<AccessToken>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var loginUser = _authService.Login(request.Login);
 
-            var token = _authService.CreateAccessToken(loginUser.Data);
-           
+            if (!loginUser.Success)
+            {
+                return new ServiceResponse<AccessToken>(loginUser.Message);
 
-            return  await token;
+            }
+            var token = await _authService.CreateAccessToken(loginUser.Data);
+
+            return new ServiceResponse<AccessToken>(token,true,"Token oluşturuldu.");
         }
     }
 }

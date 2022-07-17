@@ -34,14 +34,21 @@ namespace ATMProject.Persistance.Services
         public ServiceResponse<Account> Login(UserForLoginDto userForLoginDto)
         {
             var userToCheck = _service.GetByMail(userForLoginDto.Email);
-           
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password,userToCheck.PasswordHash,userToCheck.PasswordSalt))
+
+            if (userToCheck.Success==false)
+            {
+                return new ServiceResponse<Account>(userToCheck.Message);
+            }
+            else
+            {
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
             {
                 return new ServiceResponse<Account>("Parolanız yanlış.");
 
             }
-            return new ServiceResponse<Account>(userToCheck,true,"Giriş başarılı");
-
+            return new ServiceResponse<Account>(userToCheck.Data, true, "Giriş başarılı");
+            }
+          
         }
 
         public async Task<ServiceResponse<Account>> Register(UserForRegisterDto userForRegisterDto, string password)
